@@ -56,6 +56,27 @@ Focused follow-up tools:
 - `discover_webmcp_tools`: inspect page-declared WebMCP inventory; never invoke
   the discovered tools.
 
+## Interpret network observations
+
+For a working/failing network comparison, first identify what the observation
+can prove. A WebSocket connection or received binary frames prove neither a
+particular application-protocol acknowledgement nor useful application data.
+REA's passive WebSocket observation reports direction, opcode and byte length;
+optional value-free shapes do not decode binary protocols. It cannot recover
+handshakes or frames from before attachment. Do not repeatedly request the same
+capture expecting omitted payloads to appear.
+
+If the question needs protocol contents, use an existing suitable capture or a
+separately authorized observation through the user's selected browser/tool.
+Check that tool's actual capture contract; a network request list may exclude
+frames. Keep externally collected observations distinct from REA Evidence and
+record their target, producer, timestamps and limitations without inventing an
+Evidence ID. Page evaluation, listener injection, active connections and replay
+are not REA passive observation and must stay within the user's task scope.
+For bounded observers, distinguish decoded records from complete wire coverage,
+account for pending parsing and partial buffers, and report listener removal,
+connection closure and debugger cleanup independently of the data collected.
+
 Use `reconcile_javascript_runtime` only after static application Evidence and
 passive browser/Electron Evidence exist. Prefer captured-source digest identity;
 report path/digest disagreement as a mismatch and preserve ambiguity. Explicit

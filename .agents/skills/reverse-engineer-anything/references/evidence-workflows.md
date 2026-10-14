@@ -69,3 +69,42 @@ When the connected schema advertises `include_query_parameter_names`, select
 it in the view for distinct observed names with original record ordinals. Query
 values are omitted; the names establish neither required parameters nor a
 complete server schema. Keep the original parent Evidence for exact URLs.
+
+## Compare a working and failing case
+
+Start with the requested outcome and the strongest existing successful and
+failed observations. A static implementation is a candidate working case until
+the relevant behavior has been observed. If runtime access is unavailable,
+continue useful static analysis and leave runtime success explicitly unknown.
+
+1. Separate stages before choosing the next experiment: transport connection,
+   protocol acceptance, operation acknowledgement, application data, and the
+   user's required coverage or freshness. Use the stages the target actually
+   exposes. A connection log does not prove data delivery; a combined display
+   can hide polling, cache, or another fallback source.
+2. Record a small comparison table: exact artifact/library identity, environment,
+   selected options, observed stage/result, capture window, and unmeasured
+   differences. Preserve relevant non-sensitive values and provenance when
+   available. Configured values and page properties are not captured wire
+   values; do not reconstruct missing headers from them.
+3. Distinguish user constraints and service access rules from investigator-chosen
+   controls. Holding a value fixed improves a comparison; it does not prove the
+   value is accepted or make it a permanent implementation requirement. Revisit
+   a control when evidence implicates it, within the existing authorization.
+   Compatibility testing does not authorize copying another client's identity,
+   evading an access restriction, or cycling identities after refusals.
+4. Choose a bounded experiment that discriminates between the remaining
+   hypotheses. Where useful, hold the environment and real library constant
+   before replacing a component. Name confounders such as concurrent clients,
+   duplicate-session replacement, server state, timing, or incomplete capture.
+   A second attempt with unchanged conditions is not a new explanation.
+5. Verify a successful candidate in the intended client and through the user's
+   actual outcome. Keep transport, subscription/operation, data attribution,
+   coverage, and freshness claims separate. Stop redundant probing once that
+   outcome is established; record remaining production or causal unknowns.
+
+Report a working configuration separately from the exact cause of rejection.
+One changed identifier that succeeds does not establish a prefix rule or a
+specific denylist. A generic refusal code can represent several causes.
+Replace stale handoff conclusions when new observations contradict them, and
+retain enough evidence to explain why the conclusion changed.
